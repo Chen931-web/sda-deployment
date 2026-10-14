@@ -77,6 +77,11 @@
                 { name: "mock-aai", imports: ["aai-db"], image: "harbor.nbis.se/test/ls_aai_mock:2.5.3", port: "8800" },
                 { name: "aai-db", imports: ["aai-mock.sql"], image: "mysql/mysql-server:latest" },
             ],
+            "REMS": [
+                { name: "app", imports: ["config.edn", "db", "mock-aai"], image: "cscfi/rems:latest", port: "3000" },
+                { name: "db", imports: [],  image: "postgres:18", port: "5432"  }
+            ]
+            ,
             // "Test": [
             //     { name: "integration_test", imports: ["auth-cega", "auth-aai", "auth-aai-mfa", "cega-nss", "credentials", "finalize", "ingest", "mapper", "s3inbox", "verify", "api", "reencrypt", "rotatekey", "download"], image: "python:3.13-slim-trixie" }
             //     { name: "credentials", imports: ["postgres", "rabbitmq", "make_sda_credentials.sh"], image: "python:3.13-slim-trixie" }
@@ -87,7 +92,8 @@
                 { name: "rbac.json", imports: [] },
                 { name: "users.py", imports: [] },
                 { name: "aai-mock.sql", imports: [] },
-                // { name: "make_sda_credentials.sh", imports: [] }
+                { name: "config.edn", imports: [] },
+                // { name: "make_sda_credentials.sh", imports: [] },
             ]
         };
 
